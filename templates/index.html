@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>會員登入</title>
+		<meta name="robots" content="index, follow" />
+		<base target="_self" />
+		<meta name="description" content="會員登入和註冊" />
+		<meta name="author" content="Rocky Wu" />
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+
+			header {
+				height: 20vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #223344;
+			}
+			header h1 {
+				color: white;
+				font-size: 3rem;
+			}
+
+			section {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			section h1 {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				height: 10vh;
+			}
+			section hr {
+				margin: 1rem 0rem;
+			}
+			section a {
+				padding: 1.5rem 0rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				font-size: 1rem;
+			}
+			section form {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin: 1rem 0rem;
+			}
+			section form label {
+				font-size: 1.2rem;
+			}
+			section form input {
+				margin: 0.5rem 0.5rem;
+				padding: 0.5rem 0.5rem;
+			}
+			section form button {
+				padding: 0.5rem 0.75rem;
+				cursor: pointer;
+			} /*# sourceMappingURL=style.css.map */
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>歡迎光臨，請註冊登入系統</h1>
+		</header>
+		<section>
+			<h1>註冊帳號</h1>
+			<form action="/signup" method="POST">
+				<label form="name">姓名</label>
+				<input type="text" name="name" id="name" />
+				<label for="username">帳號</label>
+				<input type="text" name="username" id="username" />
+				<label for="password">密碼</label>
+				<input type="text" name="password" id="password" />
+				<button type="submit">註冊</button>
+			</form>
+			<hr />
+			<h1>登入系統</h1>
+			<form action="/signin" method="POST">
+				<label for="signinUsername">帳號</label>
+				<input type="text" name="signinUsername" id="signinUsername" />
+				<label for="signinPassword">密碼</label>
+				<input type="text" name="signinPassword" id="signinPassword" />
+				<button type="submit">登入</button>
+			</form>
+		</section>
+	</body>
+</html>

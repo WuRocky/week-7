@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>會員頁面</title>
+		<meta name="robots" content="index, follow" />
+		<base target="_self" />
+		<meta name="description" content="會員頁面" />
+		<meta name="author" content="Rocky Wu" />
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+
+			header {
+				height: 20vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #223344;
+			}
+			header h1 {
+				color: white;
+				font-size: 3rem;
+			}
+
+			section {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			section h1 {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				height: 10vh;
+			}
+			section hr {
+				margin: 1rem 0rem;
+			}
+			section a {
+				padding: 1.5rem 0rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				font-size: 1.5rem;
+			}
+			section form {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin: 1rem 0rem;
+			}
+			section form label {
+				font-size: 1.2rem;
+			}
+			section form input {
+				margin: 0.5rem 0.5rem;
+				padding: 0.5rem 0.5rem;
+			}
+			section form button {
+				padding: 0.5rem 0.75rem;
+				cursor: pointer;
+			} /*# sourceMappingURL=style.css.map */
+			#test {
+				display: flex;
+				flex-direction: column;
+
+				align-items: center;
+				margin: 1rem 0rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>歡迎光臨，這是會員頁面</h1>
+		</header>
+		<section>
+			<h1>{{name}}，歡迎登入系統</h1>
+			<a href="/signout">登出系統</a>
+			<hr />
+			<h1>快來留言吧</h1>
+			<form action="/message" method="POST">
+				<label for="content">內容</label>
+				<input type="text" name="content" id="content" />
+				<button type="submit">送出</button>
+			</form>
+			<hr />
+			<div id="test">
+				{% for e in message %}
+				<p>{{e[0]}}:{{e[1]}}</p>
+				{% endfor %}
+			</div>
+		</section>
+	</body>
+</html>
