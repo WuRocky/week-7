@@ -133,6 +133,7 @@ def signout():
   del session["username"],session["id"],session["name"]
   return redirect("/")
 
+# api
 @app.route("/api/member/", methods=["PATCH","GET"])
 def api():
   try:
