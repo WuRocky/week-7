@@ -170,7 +170,6 @@ def api():
         success__updata_name={
         "ok":True
         }
-
         mycursor.execute("update member set name = %s where id = %s",(updata_neame,session["id"],))
         connection.commit()
         if mycursor.rowcount != None:
