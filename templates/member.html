@@ -68,11 +68,39 @@
 				padding: 0.5rem 0.75rem;
 				cursor: pointer;
 			} /*# sourceMappingURL=style.css.map */
-			#test {
+			#talk {
 				display: flex;
 				flex-direction: column;
 
 				align-items: center;
+				margin: 1rem 0rem;
+			}
+			#inquiry {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				margin: 1rem 0rem;
+			}
+			#quiryName p {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: 1.75rem;
+				margin: 1rem 0rem;
+			}
+			#updata {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				margin: 1rem 0rem;
+			}
+			#updataName p {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: 1.75rem;
 				margin: 1rem 0rem;
 			}
 		</style>
@@ -84,6 +112,23 @@
 		<section>
 			<h1>{{name}}，歡迎登入系統</h1>
 			<a href="/signout">登出系統</a>
+			<h1>查詢會員姓名</h1>
+			<div id="quiryName">
+				<form id="inquiry">
+					<input type="text" name="username" />
+					<button type="submit" id="api">查詢</button>
+				</form>
+				<p id="resultQuiryName"></p>
+			</div>
+			<hr />
+			<h1>更新我的名字</h1>
+			<div id="updataName">
+				<form id="updata">
+					<input type="text" name="updataName" />
+					<button type="submit" id="updataAPI">更新</button>
+				</form>
+				<p id="resultUpdataName"></p>
+			</div>
 			<hr />
 			<h1>快來留言吧</h1>
 			<form action="/message" method="POST">
@@ -92,11 +137,109 @@
 				<button type="submit">送出</button>
 			</form>
 			<hr />
-			<div id="test">
+			<div id="talk">
 				{% for e in message %}
 				<p>{{e[0]}}:{{e[1]}}</p>
 				{% endfor %}
 			</div>
 		</section>
 	</body>
+	<script>
+		let add = document.querySelector("#api");
+		let quiryName = document.querySelector("#quiryName");
+		let addUpdata = document.querySelector("#updataAPI");
+		let updataName = document.querySelector("#updataName");
+		let resultQuiryName = document.querySelector("#resultQuiryName");
+		let resultUpdataName = document.querySelector("#resultUpdataName");
+
+		// add.addEventListener("click", (e) => {
+		// 	e.preventDefault();
+		// 	let form = e.target.parentElement;
+		// 	let inputData = form.children[0].value;
+		// 	console.log(typeof inputData);
+		// 	let apiURL = "/api/member?username=" + inputData;
+		// 	fetch("http://127.0.0.1:3000/api/member/?username=" + inputData)
+		// 		.then(function (response) {
+		// 			console.log(response);
+		// 			return response.json();
+		// 		})
+		// 		.then(function (data) {
+		// 			console.log(data);
+		// 			let check = data["data"];
+		// 			console.log(check);
+		// 			let apiDataName = data["data"]["name"];
+		// 			let apiDataUsername = data["data"]["username"];
+		// 			if (check != null && data["data"]["username"] == inputData) {
+		// 				resultQuiryName.innerHTML =
+		// 					apiDataName + "(" + apiDataUsername + ")";
+		// 				quiryName.appendChild(resultQuiryName);
+		// 			} else {
+		// 				resultQuiryName.innerHTML = "查無會員姓名";
+		// 				quiryName.appendChild(resultQuiryName);
+		// 			}
+		// 		});
+		// });
+		/////////////////////////////////////////////////////
+		add.addEventListener("click", (e) => {
+			e.preventDefault();
+			let form = e.target.parentElement;
+			let inputData = form.children[0].value;
+			if (inputData === "") {
+				alert("請輸入資料");
+				return;
+			}
+			let apiURL = "http://127.0.0.1:3000/api/member/?username=" + inputData;
+			fetch(apiURL)
+				.then(function (response) {
+					return response.json();
+				})
+				.then(function (data) {
+					let check = data["data"];
+					console.log(check);
+					let apiDataName = data["data"]["name"];
+					let apiDataUsername = data["data"]["username"];
+					if (check != null && data["data"]["username"] == inputData) {
+						resultQuiryName.innerHTML =
+							apiDataName + "(" + apiDataUsername + ")";
+						quiryName.appendChild(resultQuiryName);
+					} else {
+						resultQuiryName.innerHTML = "查無會員姓名";
+						quiryName.appendChild(resultQuiryName);
+					}
+				});
+		});
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		addUpdata.addEventListener("click", (e) => {
+			e.preventDefault();
+			let form = e.target.parentElement;
+			let updataData = form.children[0].value;
+			if (updataData === "") {
+				alert("請輸入資料");
+				return;
+			}
+			fetch("http://127.0.0.1:3000/api/member/", {
+				method: "PATCH",
+				body: JSON.stringify({
+					name: updataData,
+				}),
+				headers: {
+					"Content-type": "application/json;",
+				},
+			})
+				.then(function (response) {
+					return response.json();
+				})
+				.then(function (data) {
+					let updataResult = data;
+					keyValue = Object.keys(updataResult);
+					if (keyValue == "ok") {
+						resultUpdataName.innerHTML = updataData;
+						updataName.appendChild(resultUpdataName);
+					} else {
+						resultUpdataName.innerHTML = "更新失敗";
+						updataName.appendChild(resultUpdataName);
+					}
+				});
+		});
+	</script>
 </html>
