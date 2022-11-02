@@ -151,35 +151,7 @@
 		let updataName = document.querySelector("#updataName");
 		let resultQuiryName = document.querySelector("#resultQuiryName");
 		let resultUpdataName = document.querySelector("#resultUpdataName");
-
-		// add.addEventListener("click", (e) => {
-		// 	e.preventDefault();
-		// 	let form = e.target.parentElement;
-		// 	let inputData = form.children[0].value;
-		// 	console.log(typeof inputData);
-		// 	let apiURL = "/api/member?username=" + inputData;
-		// 	fetch("http://127.0.0.1:3000/api/member/?username=" + inputData)
-		// 		.then(function (response) {
-		// 			console.log(response);
-		// 			return response.json();
-		// 		})
-		// 		.then(function (data) {
-		// 			console.log(data);
-		// 			let check = data["data"];
-		// 			console.log(check);
-		// 			let apiDataName = data["data"]["name"];
-		// 			let apiDataUsername = data["data"]["username"];
-		// 			if (check != null && data["data"]["username"] == inputData) {
-		// 				resultQuiryName.innerHTML =
-		// 					apiDataName + "(" + apiDataUsername + ")";
-		// 				quiryName.appendChild(resultQuiryName);
-		// 			} else {
-		// 				resultQuiryName.innerHTML = "查無會員姓名";
-		// 				quiryName.appendChild(resultQuiryName);
-		// 			}
-		// 		});
-		// });
-		/////////////////////////////////////////////////////
+		// quireName
 		add.addEventListener("click", (e) => {
 			e.preventDefault();
 			let form = e.target.parentElement;
@@ -208,7 +180,7 @@
 					}
 				});
 		});
-		////////////////////////////////////////////////////////////////////////////////////////////////
+		//updataName
 		addUpdata.addEventListener("click", (e) => {
 			e.preventDefault();
 			let form = e.target.parentElement;
