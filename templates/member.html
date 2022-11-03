@@ -146,11 +146,10 @@
 	</body>
 	<script>
 		let add = document.querySelector("#api");
-		let quiryName = document.querySelector("#quiryName");
 		let addUpdata = document.querySelector("#updataAPI");
-		let updataName = document.querySelector("#updataName");
 		let resultQuiryName = document.querySelector("#resultQuiryName");
 		let resultUpdataName = document.querySelector("#resultUpdataName");
+
 		// quireName
 		add.addEventListener("click", (e) => {
 			e.preventDefault();
@@ -167,19 +166,17 @@
 				})
 				.then(function (data) {
 					let check = data["data"];
-					console.log(check);
-					let apiDataName = data["data"]["name"];
-					let apiDataUsername = data["data"]["username"];
-					if (check != null && data["data"]["username"] == inputData) {
+					if (check != null && check["username"] == inputData) {
+						let apiDataName = check["name"];
+						let apiDataUsername = check["username"];
 						resultQuiryName.innerHTML =
 							apiDataName + "(" + apiDataUsername + ")";
-						quiryName.appendChild(resultQuiryName);
 					} else {
 						resultQuiryName.innerHTML = "查無會員姓名";
-						quiryName.appendChild(resultQuiryName);
 					}
 				});
 		});
+
 		//updataName
 		addUpdata.addEventListener("click", (e) => {
 			e.preventDefault();
@@ -206,10 +203,8 @@
 					keyValue = Object.keys(updataResult);
 					if (keyValue == "ok") {
 						resultUpdataName.innerHTML = updataData;
-						updataName.appendChild(resultUpdataName);
 					} else {
 						resultUpdataName.innerHTML = "更新失敗";
-						updataName.appendChild(resultUpdataName);
 					}
 				});
 		});

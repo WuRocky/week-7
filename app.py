@@ -139,12 +139,12 @@ def api():
   try:
     connection = get_connection()
     mycursor = connection.cursor()
-    data_null =json.dumps({
+    data_null ={
     "data":None
-    }) 
-    error_updat_name =json.dumps({
+    }
+    error_updat_name ={
     "error":True
-    }) 
+    }
     if request.method == "GET":
       if "username" in session:
         username = request.args.get("username","要查詢的會員帳號")
@@ -152,15 +152,15 @@ def api():
         sql_data=mycursor.fetchall()
         if sql_data != None:
           for api in sql_data:
-            data_api =json.dumps({
+            data_api ={
             "data":{
             "id":api[0],
             "name":api[1],
             "username":api[2]
             }
-            }) 
-            return data_api
-      return data_null
+            }
+            return jsonify(data_api)
+      return jsonify(data_null)
     if request.method == "PATCH":
       if "username" in session:
         request_API = request.json
@@ -173,8 +173,8 @@ def api():
         mycursor.execute("update member set name = %s where id = %s",(updata_neame,session["id"],))
         connection.commit()
         if mycursor.rowcount != None:
-          return success__updata_name
-      return error_updat_name
+          return jsonify(success__updata_name)
+      return jsonify(error_updat_name)
   except: 
     print("Unexpected Error")
   finally:
